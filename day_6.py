@@ -19,7 +19,7 @@ with open("challenges/day_6.txt") as file:
     lanternfish = map(int, file.read().split(","))
 
 reproduce: Callable[[FishList], FishList]
-reproduce = lambda fish: flatten([[f-1] if f != 0 else [6,8] for f in fish])
+reproduce = lambda fish: flatten([[f - 1] if f != 0 else [6, 8] for f in fish])
 
 
 def task1(fish_list):
@@ -37,8 +37,7 @@ def task2(fish_list):
 
     for i in range(256):
         count_fish_0 = snd(fst(fish_list))
-        fish_list = [(fish, count) for (fish, _), (_, count) in zip(fish_list, fish_list[1:])]
-        fish_list.append((8, count_fish_0))
+        fish_list = [(fish, count) for (fish, _), (_, count) in zip(fish_list, fish_list[1:])] + [(8, count_fish_0)]
         fish_list[6] = (6, snd(fish_list[6]) + count_fish_0)
 
     no_of_fish = sum(map(snd, fish_list))
