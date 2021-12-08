@@ -65,6 +65,8 @@ def task2():
         num0 = [num for num in input_line if not (num8 - num <= num1) and len(num) == 6][0]
         input_line.remove(num0)
 
+        # since the 0 and the 6 are the only numbers with 6 segments and the 0 was removed,
+        # the only number felt with 6 segments is the 6
         num6 = filter_num(6, input_line)
         input_line.remove(num6)
 
