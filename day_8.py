@@ -32,9 +32,7 @@ def task1():
     print(len(list(output_values)))
 
 
-get_words = lambda f, l: map(lambda w: w.split(), map(f, l))
 filter_num = lambda n, l: list(filter(lambda s: len(s) == n, l))[0]
-get_key_by_value = lambda val, d: list(d.keys())[list(d.values()).index(val)]
 
 
 def task2():
