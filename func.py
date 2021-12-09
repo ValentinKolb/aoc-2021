@@ -10,6 +10,10 @@ class Pipe(Protocol[T]):
         ...
 
 
+# general
+not_None = lambda e: e is not None
+is_None = lambda e: e is None
+
 # helper index methods
 fst: Callable[[Iterable[T]], T]
 fst = lambda t: t[0]
@@ -47,18 +51,3 @@ pflatten = pipe(flatten)
 
 if __name__ == '__main__':
     ...
-
-
-
-str_to_number = {
-    "abcefg": 0,
-    "cf": 1,
-    "acdeg": 2,
-    "acdfg": 3,
-    "bcdf": 4,
-    "abdfg": 5,
-    "abdefg": 6,
-    "acf": 7,
-    "abcdefg": 8,
-    "abcdfg": 9
-}
