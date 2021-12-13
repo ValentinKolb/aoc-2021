@@ -1,4 +1,4 @@
-from typing import TypeVar, Callable, Iterable, Protocol, Any, Generic, NewType, Union
+from typing import TypeVar, Callable, Iterable, Protocol, Any, NewType, Union, Generic
 
 T = TypeVar("T")
 T1 = TypeVar("T1")
@@ -109,5 +109,43 @@ def print_matrix(matrix: list[list[Any]]) -> None:
         print(" ".join(str(elem).rjust(max_len) for elem in row))
 
 
+class Monad:
+    def __init__(self, expr):
+        self.expr = expr
+
+    @classmethod
+    def unit(cls, expr):
+        return Monad(expr)
+
+    def __irshift__(self, other):
+        print(other)
+
+
+class Maybe(Generic[T]):
+    def __init__(self, val):
+        self.val = val
+
+    def __and__(self, other):
+        return None if self.val is None else other
+
+
+Just = lambda maybe: maybe.val
+
+div = lambda x, y: None if y == 0 else x / y
+
 if __name__ == '__main__':
-    ...
+    do = lambda *args: lst(args)
+    res = do(
+        x := 1,
+        y := 2 + x,
+        _ := 3 + y
+    )
+    print(res)  # -> 6
+
+    res = (Maybe(x := 10) &
+           Maybe(y := x * 2) &
+           Maybe(z := y - 20) &
+           Maybe(err := div(1, 0)) &
+           Maybe(z + 42))
+
+    print(res)
