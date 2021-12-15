@@ -90,12 +90,23 @@ infix = lambda f: type("infix", (),
 # matrix helpers
 position = lambda m, x, y: m[y][x]
 
-# returns the coordinates of all neighbors (diagonal included
-neighbors = lambda m, x, y: filter(not_None,
-                                   ((x_, y_) if 0 <= x_ < len(m[0]) and 0 <= y_ < len(m) and (x_, y_) != (
-                                       x, y) else None
-                                    for x_ in (x - 1, x, x + 1)
-                                    for y_ in (y - 1, y, y + 1)))
+# returns the coordinates of all neighbors (diagonal included)
+neighbors = lambda m, x, y: (
+    (x_, y_)
+    for x_ in (x - 1, x, x + 1)
+    for y_ in (y - 1, y, y + 1)
+    if 0 <= x_ < len(m[0]) and 0 <= y_ < len(m) and (x_, y_) != (x, y)
+)
+
+# returns the coordinates of all neighbors (diagonal excluded)
+neighbors_sq = lambda m, x, y: (
+    (x_, y_)
+    for x_, y_ in ((x, y - 1), (x - 1, y), (x + 1, y), (x, y + 1))
+    if 0 <= x_ < len(m[0]) and 0 <= y_ < len(m)
+)
+
+height = lambda m: len(m)
+width = lambda m: len(fst(m))
 
 # same as index but for two dimensions, returns the x and y position
 indexm: Callable[[Matrix, Callable[[Number], bool]], tuple[int, int]]

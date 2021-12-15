@@ -43,4 +43,6 @@ if __name__ == '__main__':
             print(f'folding along {y=}')
             matrix = fold_y(matrix, int(y))
 
-    print_matrix(matrix)
+        print_matrix(matrix)
+        print()
+
