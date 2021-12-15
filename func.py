@@ -103,10 +103,10 @@ indexm = lambda m, cond: rec(lambda self, y: (-1, -1) if y == len(m[0]) \
     else (x, y) if (x := index(m[y], cond)) != -1 else self(self, y + 1), 0)
 
 
-def print_matrix(matrix: list[list[Any]]) -> None:
-    max_len = max(len(str(elem)) for row in matrix for elem in row)
+def print_matrix(matrix: list[list[Any]], transform: Callable[[Any], str] = str, space: str = " ") -> None:
+    max_len = max(len(transform(elem)) for row in matrix for elem in row)
     for row in matrix:
-        print(" ".join(str(elem).rjust(max_len) for elem in row))
+        print(space.join(transform(elem).rjust(max_len) for elem in row))
 
 
 class Monad:
